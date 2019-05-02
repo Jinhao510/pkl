@@ -16,6 +16,7 @@ Created on Tue Apr 30 13:52:19 2019
 sum total_amount
 
 """
+import csv
 import time
 import pickle
 import numpy as np
@@ -26,8 +27,9 @@ from multiprocessing import Pool  #多工處理
 
 start = time.time()
 print("time start")  
-
 # reload a file to a variable
+
+filen="test_store"
 with open('test_store.pickle', 'rb') as file:
     a_dict1 =pickle.load(file)
     
@@ -39,15 +41,15 @@ a_dict1 = a_dict1.set_index('date_time')
 
 mon_sum=a_dict1.resample('MS').sum()
 C=mon_sum.iloc[:,1]
-#print(C)
-del a_dict1['index']
-D=C.T
-
+D=np.append([filen],C,axis=0)
 print(D)
-
-df = C.to_csv("test_store.csv",index=False)
-
-
+"""
+C=np.array(C)
+D=C.transpose()
+pd.DataFrame(D).to_csv("test_store.csv",index=False)
+"""
+#D.to_csv("test_store.csv",index=False)
+pd.DataFrame(D).to_csv("test_store.csv",index=False)
 
 
 """
