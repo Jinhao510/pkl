@@ -24,7 +24,8 @@ import pandas as pd
 import seaborn as sns
 from datetime import datetime
 import matplotlib.pyplot as plt
-from multiprocessing import Pool  #多工處理
+import multiprocessing as mp
+
 
 start = time.time()
 print("@@time start@@")  
@@ -45,7 +46,7 @@ for i in range(2):
         mon_sum=a_dict1.resample('MS').sum()
         C=mon_sum.iloc[:,1]
         D=np.append([filen],C,axis=0)
-        #print(D)
+        print(D)
         D=np.array(D)
         #E=D.transpose()
      
@@ -61,7 +62,36 @@ for i in range(2):
 
     
 
+"""
+平行處理
+"""
+def job(q):
+    res = 0
+    for i in range(1000000):
+        res += i+i**2+i**3
+    q.put(res) # queue
 
+def multicore():
+    q = mp.Queue()
+    p1 = mp.Process(target=job, args=(q,)) #幾個序
+    p2 = mp.Process(target=job, args=(q,))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+    res1 = q.get()
+    res2 = q.get()
+    print('multicore:' , res1+res2)
+
+
+"""
+if __name__ == '__main__':
+    st = time.time()
+    st2 = time.time()
+    multicore()
+    print('multicore time:', time.time()-st2)
+
+"""
 
 
 

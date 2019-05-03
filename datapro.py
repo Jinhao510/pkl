@@ -49,7 +49,9 @@ D=C.transpose()
 pd.DataFrame(D).to_csv("test_store.csv",index=False)
 """
 #D.to_csv("test_store.csv",index=False)
-pd.DataFrame(D).to_csv("test_store.csv",index=False)
+C=mon_sum.iloc[:,1]
+D=np.append([filen],C,axis=0)
+pd.DataFrame(D).to_csv("amount.csv",index=False)
 
 
 """
