@@ -9,21 +9,34 @@ import time
 
 def job(q):
     res = 0
-    for i in range(1000000):
+    for i in range(10):
         res += i+i**2+i**3
-    q.put(res) # queue
+        print(res)
+    q.put(res,i) # queue
 
 def multicore():
     q = mp.Queue()
     p1 = mp.Process(target=job, args=(q,))
     p2 = mp.Process(target=job, args=(q,))
+    p3 = mp.Process(target=job, args=(q,))
+    
     p1.start()
     p2.start()
+    p3.start()
+
     p1.join()
     p2.join()
+    p3.join()
+ 
     res1 = q.get()
     res2 = q.get()
-    print('multicore:' , res1+res2)
+    res3 = q.get()
+
+    print('multicore:' , res1,res2,res3)
+
+
+
+
 
 
 
@@ -32,3 +45,5 @@ if __name__ == '__main__':
     st2 = time.time()
     multicore()
     print('multicore time:', time.time()-st2)
+
+    

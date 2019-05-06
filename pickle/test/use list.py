@@ -22,28 +22,38 @@ with open('test_store.csv', newline='') as csvfile:
             # si=str(i)
             # nsi=si[2:-2]
         flist.append(i)
-        i=0
-        while i < 11:
-            print (flist)
-            i += 1
+        #print(flist) 
+        file_number=len(flist)
+        
+        
+ 
+       
+while (file_number !=0):
+    try:
+        WF=flist[0]
+        si = str(WF)
+        nsi = si[2:-2]
+    except ValueError:
+        break
+    #print(nsi)
+    with open(nsi, 'rb') as file:
+        x=flist.pop(0)if flist else False
+        file_number=len(flist)
+        print(nsi,"start")
+                   
+       
+        
+        
         #print(rows,i)
         #flist.pop(range(i))
         #print(flist)
         
 
-print(flist)
-print("-----------------------------")
-print(flist.pop(0))
-print(flist)
 
 
 
-i = 0
-   while i < file_number:
-       WF=flist[i]
-       si = str(WF)
-       nsi = si[2:-2]
-       i += 1 
+
+
 
 #pd.DataFrame(flist).to_csv("te123.csv",header=False,mode='a',index=False)
 
