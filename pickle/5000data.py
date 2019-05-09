@@ -13,11 +13,16 @@ import pandas as pd
 
 with open('test_store.pickle', 'rb') as file:
     dataset =pickle.load(file)
+   
+    for i in range(5):
+        
+        
+        #fw = open('Ntest_store' + str(i) +'.pickle','wb')
+        #pickle.dump(dataset, fw)
+       # fw.close()
+        #print(i)
 
-for i in range(5000):
-    fw = open('test_store' + str(i) +'.pickle','wb')
-    # Pickle the list using the highest protocol available.
-    pickle.dump(dataset, fw)
-    fw.close()
-    print(i)
+
+
+    
     
